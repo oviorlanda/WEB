@@ -1,155 +1,189 @@
 import streamlit as st
+import os
 
+# ======================
+# PAGE CONFIG
+# ======================
 st.set_page_config(
     page_title="Optical Communication Laboratory",
-    page_icon="🔵",
-    layout="wide"
+    layout="wide",
 )
 
-# ===============================
+# ======================
 # STATE
-# ===============================
-if "mode" not in st.session_state:
-    st.session_state.mode = "info"
+# ======================
+if "page" not in st.session_state:
+    st.session_state.page = "home"
 
-# ===============================
-# CSS
-# ===============================
-st.markdown(
-    """
-    <style>
-    body {
-        background-color: #f5f7fa;
-    }
+# ======================
+# GLOBAL CSS
+# ======================
+st.markdown("""
+<style>
 
+/* ===== RESET ===== */
+html, body, [class*="css"] {
+    background-color: #1E90FF !important;
+}
+
+/* ROOT */
+.stApp {
+    background-color: #1E90FF !important;
+    color: #ffffff;
+}
+
+/* CONTENT */
+.block-container {
+    padding-top: 0rem;
+    background-color: #1E90FF !important;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: linear-gradient(135deg, #1b6fe5, #2d8cff);
+    padding: 30px 60px;
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* LOGO */
+.logo img {
+    border-radius: 12px;
+}
+
+/* ===== NAV BUTTON ===== */
+button[kind="secondary"] {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 16px;
+}
+
+button[kind="secondary"]:hover {
+    color: #cce4ff !important;
+}
+
+/* ===== SECTION ===== */
+.subtitle {
+    color: #dbeafe;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: #2d7ff0;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+    transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    background: #3b91ff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
     .header {
-        background-color: #1E90FF;
-        padding: 35px 20px;
-        border-radius: 0px 0px 25px 25px;
+        padding: 20px 25px;
+        text-align: center;
     }
+}
 
-    .lab-title {
-        font-size: 36px;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 5px;
-    }
+</style>
+""", unsafe_allow_html=True)
 
-    .lab-subtitle {
-        font-size: 16px;
-        color: #eaf3ff;
-    }
-
-    .content-box {
-        padding: 30px;
-        background-color: white;
-        border-radius: 15px;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-        margin-top: 25px;
-    }
-
-    .stButton>button {
-        background-color: #ffffff;
-        color: #1E90FF;
-        border-radius: 8px;
-        border: none;
-        padding: 6px 14px;
-        font-weight: 600;
-    }
-
-    .stButton>button:hover {
-        background-color: #eaf3ff;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# ===============================
+# ======================
 # HEADER
-# ===============================
+# ======================
 st.markdown('<div class="header">', unsafe_allow_html=True)
-col1, col2 = st.columns([1.2, 4])
+
+col1, col2 = st.columns([2, 6])
 
 with col1:
-    st.image("ocl_logo.png.png", width=140)
+    if os.path.exists("ocl_logo.png.jpeg"):
+        st.image("ocl_logo.png.jpeg", width=90)
 
 with col2:
-    st.markdown('<div class="lab-title">Optical Communication Laboratory</div>', unsafe_allow_html=True)
-    st.markdown('<div class="lab-subtitle">Research • Education • Innovation</div>', unsafe_allow_html=True)
+    nav1, nav2, nav3, nav4 = st.columns(4)
 
-st.markdown("</div>", unsafe_allow_html=True)
+    with nav1:
+        if st.button("About Us"):
+            st.session_state.page = "about"
+    with nav2:
+        if st.button("Our Teams"):
+            st.session_state.page = "team"
+    with nav3:
+        if st.button("Our Activity"):
+            st.session_state.page = "activity"
+    with nav4:
+        if st.button("Informations"):
+            st.session_state.page = "info"
 
-# ===============================
-# NAVBAR (TOP)
-# ===============================
-menu_cols = st.columns(7)
+st.markdown('</div>', unsafe_allow_html=True)
+st.markdown("<br><br>", unsafe_allow_html=True)
 
-menus = [
-    "HOME",
-    "ABOUT US",
-    "OUR TEAM",
-    "OUR ACTIVITY",
-    "INFORMATIONS",
-    "AI MODE",
-    "RESET"
-]
-
-clicked = None
-for i, m in enumerate(menus):
-    if menu_cols[i].button(m):
-        clicked = m
-
-if clicked == "AI MODE":
-    st.session_state.mode = "ai"
-
-if clicked == "RESET":
-    st.session_state.mode = "info"
-
-# ===============================
+# ======================
 # CONTENT
-# ===============================
-st.markdown('<div class="content-box">', unsafe_allow_html=True)
+# ======================
+if st.session_state.page == "home":
 
-if st.session_state.mode == "info":
+    st.markdown("""
+    <div style="padding: 40px;">
+        <p class="subtitle">MODULE</p>
+        <h2 class="section-title">Our Module</h2>
+    </div>
+    """, unsafe_allow_html=True)
 
-    if clicked == "ABOUT US":
-        st.header("About Us")
-        st.write(
-            "Optical Communication Laboratory (OCL) focuses on research, education, "
-            "and experimentation in fiber optic communication systems."
-        )
+    c1, c2, c3 = st.columns(3)
 
-    elif clicked == "OUR TEAM":
-        st.header("Our Team")
-        st.write("Consists of lecturers, researchers, and students in optical communication.")
+    with c1:
+        st.markdown("""
+        <div class="card">
+            <h4>Optical Fiber</h4>
+            <p>Basic optical fiber transmission module.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    elif clicked == "OUR ACTIVITY":
-        st.header("Our Activity")
-        st.write("Research, practicum sessions, publications, and laboratory development.")
+    with c2:
+        st.markdown("""
+        <div class="card">
+            <h4>WDM System</h4>
+            <p>Wavelength Division Multiplexing experiment.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    elif clicked == "INFORMATIONS":
-        st.header("Informations")
-        st.write("Latest news, schedules, and announcements related to OCL.")
+    with c3:
+        st.markdown("""
+        <div class="card">
+            <h4>Optical Network</h4>
+            <p>Optical access & backbone network module.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    else:
-        st.header("Welcome")
-        st.write(
-            "Welcome to the Optical Communication Laboratory website.\n\n"
-            "Explore research, facilities, and innovations in optical communications."
-        )
+elif st.session_state.page == "about":
+    st.header("About Us")
+    st.write("Optical Communication Laboratory focuses on optical & photonic education and research.")
 
-else:
-    st.header("🔍 Optical Signal Quality Detection (Demo)")
-    st.write(
-        "This is a **demo AI feature**.\n\n"
-        "In future development, this section can analyze:\n"
-        "- Signal attenuation\n"
-        "- Noise impact\n"
-        "- BER estimation\n"
-        "- Fiber quality assessment"
-    )
+elif st.session_state.page == "team":
+    st.header("Our Teams")
+    st.write("Our lecturers, assistants, and researchers.")
 
-    st.info("This AI feature is currently illustrative (no model required).")
+elif st.session_state.page == "activity":
+    st.header("Our Activity")
+    st.write("Practical sessions, research, and collaborations.")
 
-st.markdown("</div>", unsafe_allow_html=True)
+elif st.session_state.page == "info":
+    st.header("Informations")
+    st.write("Announcements and laboratory information.")
