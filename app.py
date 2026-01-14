@@ -126,12 +126,48 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 # ======================
 if st.session_state.page == "home":
     st.markdown("""
-    <div style="padding:40px;">
-        <h1>Welcome to Optical Communication Laboratory</h1>
-        <p style="font-size:18px; max-width:850px;">
-        This website provides academic, research, and laboratory information
-        related to optical and photonic communication systems.
+    <div style="
+        padding:70px 60px;
+        max-width:1200px;
+    ">
+        <p class="subtitle">WELCOME</p>
+
+        <h1 style="
+            font-size:48px;
+            font-weight:900;
+            line-height:1.2;
+            margin-bottom:20px;
+        ">
+            Optical Communication Laboratory
+        </h1>
+
+        <p style="
+            font-size:20px;
+            line-height:1.8;
+            max-width:900px;
+            color:#eaf3ff;
+        ">
+        The Optical Communication Laboratory (OCL) is a leading academic laboratory
+        focusing on education, research, and innovation in optical and photonic
+        communication systems that support modern telecommunication infrastructure.
         </p>
+
+        <div style="margin-top:40px; display:flex; gap:25px; flex-wrap:wrap;">
+            <div class="card" style="max-width:280px;">
+                <h3>🎓 Education</h3>
+                <p>Hands-on practical learning for optical communication systems.</p>
+            </div>
+
+            <div class="card" style="max-width:280px;">
+                <h3>🔍 Research</h3>
+                <p>Fiber optics, WDM, FTTH, and optical network analysis.</p>
+            </div>
+
+            <div class="card" style="max-width:280px;">
+                <h3>🚀 Innovation</h3>
+                <p>Developing future photonic and optical technologies.</p>
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -232,3 +268,4 @@ elif st.session_state.page == "info":
             <p>Access & backbone optical networks.</p>
         </div>
         """, unsafe_allow_html=True)
+
