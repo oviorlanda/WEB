@@ -140,11 +140,73 @@ if st.session_state.page == "home":
     )
 
 elif st.session_state.page == "about":
-    st.header("About Us")
-    st.write(
-        "Optical Communication Laboratory focuses on education, research, "
-        "and innovation in optical and photonic communication technologies."
-    )
+
+    st.markdown("""
+    <div style="padding: 40px;">
+        <p class="subtitle">ABOUT OCL</p>
+        <h2 class="section-title">Optical Communication Laboratory</h2>
+
+        <p style="
+            margin-top:20px;
+            max-width:900px;
+            font-size:18px;
+            line-height:1.7;
+            color:#eaf3ff;
+        ">
+        Optical Communication Laboratory (OCL) is an academic laboratory dedicated to
+        education, research, and innovation in optical and photonic communication systems.
+        The laboratory supports practical learning and scientific exploration for students
+        and researchers in the field of telecommunications.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        st.markdown("""
+        <div class="card">
+            <h3>📡 Education</h3>
+            <p>
+            Providing hands-on practicum modules and learning facilities
+            to strengthen students’ understanding of optical communication systems.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c2:
+        st.markdown("""
+        <div class="card">
+            <h3>🔬 Research</h3>
+            <p>
+            Conducting research on fiber optic communication, WDM systems,
+            and optical network performance analysis.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c3:
+        st.markdown("""
+        <div class="card">
+            <h3>🌐 Innovation</h3>
+            <p>
+            Developing innovative solutions and experimental platforms
+            to support future optical and photonic technologies.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div style="padding: 40px;">
+        <h3 style="margin-bottom:15px;">Focus Areas</h3>
+        <ul style="font-size:17px; line-height:1.8;">
+            <li>Fiber Optic Communication Systems</li>
+            <li>Wavelength Division Multiplexing (WDM)</li>
+            <li>Optical Access & Backbone Networks</li>
+            <li>Photonic Devices & Systems</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True.")
 
 elif st.session_state.page == "team":
     st.header("Our Teams")
@@ -188,3 +250,4 @@ elif st.session_state.page == "info":
             <p>Optical access & backbone network module.</p>
         </div>
         """, unsafe_allow_html=True)
+
