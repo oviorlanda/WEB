@@ -1,191 +1,147 @@
 import streamlit as st
-import os
 
-# ======================
-# PAGE CONFIG
-# ======================
+# ========================
+# CONFIG
+# ========================
 st.set_page_config(
     page_title="Optical Communication Laboratory",
-    layout="wide",
+    layout="wide"
 )
 
-# ======================
-# STATE
-# ======================
-if "page" not in st.session_state:
-    st.session_state.page = "home"
+# ========================
+# STATE MODE
+# ========================
+if "mode" not in st.session_state:
+    st.session_state.mode = "OCL"
 
-# ======================
-# GLOBAL CSS
-# ======================
-st.markdown("""
-<style>
 
-/* ===== RESET ===== */
-html, body, [class*="css"] {
-    background-color: #1E90FF !important;
-}
-
-/* ROOT */
-.stApp {
-    background-color: #1E90FF !important;
-    color: #ffffff;
-}
-
-/* CONTENT */
-.block-container {
-    padding-top: 0rem;
-    background-color: #1E90FF !important;
-}
-
-/* ===== HEADER ===== */
-.header {
-    background: linear-gradient(135deg, #1b6fe5, #2d8cff);
-    padding: 30px 60px;
-    border-bottom-left-radius: 60px;
-    border-bottom-right-radius: 60px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-/* LOGO */
-.logo img {
-    border-radius: 12px;
-}
-
-/* ===== NAV BUTTON ===== */
-button[kind="secondary"] {
-    background: transparent !important;
-    color: #ffffff !important;
-    border: none !important;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 10px 16px;
-}
-
-button[kind="secondary"]:hover {
-    color: #cce4ff !important;
-}
-
-/* ===== SECTION ===== */
-.subtitle {
-    color: #dbeafe;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-}
-
-.section-title {
-    font-size: 36px;
-    font-weight: 800;
-    margin-top: 5px;
-}
-
-/* ===== CARD ===== */
-.card {
-    background: #2d7ff0;
-    border-radius: 22px;
-    padding: 28px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
-    transition: 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    background: #3b91ff;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .header {
-        padding: 20px 25px;
-        text-align: center;
-    }
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-# ======================
-# HEADER
-# ======================
-st.markdown('<div class="header">', unsafe_allow_html=True)
-
-col1, col2 = st.columns([2, 6])
-
-with col1:
-    if os.path.exists("ocl_logo.png.png"):
-        st.image("ocl_logo.png.png", width=90)
-
-with col2:
-    nav1, nav2, nav3, nav4 = st.columns(4)
-
-    with nav1:
-        if st.button("About Us"):
-            st.session_state.page = "about"
-    with nav2:
-        if st.button("Our Teams"):
-            st.session_state.page = "team"
-    with nav3:
-        if st.button("Our Activity"):
-            st.session_state.page = "activity"
-    with nav4:
-        if st.button("Informations"):
-            st.session_state.page = "info"
-
-st.markdown('</div>', unsafe_allow_html=True)
-st.markdown("<br><br>", unsafe_allow_html=True)
-
-# ======================
-# CONTENT
-# ======================
-if st.session_state.page == "home":
-
+# ========================
+# CSS MODE OCL
+# ========================
+def ocl_style():
     st.markdown("""
-    <div style="padding: 40px;">
-        <p class="subtitle">MODULE</p>
-        <h2 class="section-title">Our Module</h2>
-    </div>
+    <style>
+    .stApp {
+        background-color: white;
+    }
+
+    .ocl-header {
+        background: linear-gradient(135deg, #1E90FF, #187bcd);
+        padding: 40px 20px;
+        border-radius: 0 0 30px 30px;
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+    }
+
+    .ocl-title {
+        font-size: 38px;
+        font-weight: 800;
+        margin-top: 10px;
+    }
+
+    .ocl-subtitle {
+        font-size: 18px;
+        opacity: 0.9;
+    }
+
+    .menu-box {
+        background-color: #f7f9fc;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
+
+    </style>
     """, unsafe_allow_html=True)
 
-    c1, c2, c3 = st.columns(3)
 
-    with c1:
-        st.markdown("""
-        <div class="card">
-            <h4>Optical Fiber</h4>
-            <p>Basic optical fiber transmission module.</p>
-        </div>
-        """, unsafe_allow_html=True)
+# ========================
+# MODE SWITCH BUTTON
+# ========================
+col1, col2 = st.columns([8, 2])
 
-    with c2:
-        st.markdown("""
-        <div class="card">
-            <h4>WDM System</h4>
-            <p>Wavelength Division Multiplexing experiment.</p>
-        </div>
-        """, unsafe_allow_html=True)
+with col2:
+    if st.session_state.mode == "OCL":
+        if st.button("🔁 Default Mode"):
+            st.session_state.mode = "DEFAULT"
+            st.rerun()
+    else:
+        if st.button("🎨 OCL Mode"):
+            st.session_state.mode = "OCL"
+            st.rerun()
 
-    with c3:
-        st.markdown("""
-        <div class="card">
-            <h4>Optical Network</h4>
-            <p>Optical access & backbone network module.</p>
-        </div>
-        """, unsafe_allow_html=True)
+# ========================
+# APPLY STYLE
+# ========================
+if st.session_state.mode == "OCL":
+    ocl_style()
 
-elif st.session_state.page == "about":
-    st.header("About Us")
-    st.write("Optical Communication Laboratory focuses on optical & photonic education and research.")
+# ========================
+# HEADER
+# ========================
+if st.session_state.mode == "OCL":
+    st.markdown("""
+    <div class="ocl-header">
+        <img src="ocl_logo.png.png" width="160">
+        <div class="ocl-title">Optical Communication Laboratory</div>
+        <div class="ocl-subtitle">Research • Education • Innovation</div>
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.image("ocl_logo.png.png", width=160)
+    st.title("Optical Communication Laboratory")
+    st.write("Research • Education • Innovation")
 
-elif st.session_state.page == "team":
-    st.header("Our Teams")
-    st.write("Our lecturers, assistants, and researchers.")
+# ========================
+# NAVIGATION
+# ========================
+menu = st.tabs([
+    "🏠 Home",
+    "👥 About Us",
+    "🧑‍🔬 Our Team",
+    "🔬 Our Activity",
+    "ℹ️ Informations",
+    "🤖 AI Feature"
+])
 
-elif st.session_state.page == "activity":
-    st.header("Our Activity")
-    st.write("Practical sessions, research, and collaborations.")
+# ========================
+# CONTENT
+# ========================
+with menu[0]:
+    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
+    st.write("Welcome to the Optical Communication Laboratory web platform.")
+    st.markdown("</div>", unsafe_allow_html=True)
 
-elif st.session_state.page == "info":
-    st.header("Informations")
-    st.write("Announcements and laboratory information.")
+with menu[1]:
+    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
+    st.write("OCL focuses on optical fiber systems, photonics, and communication research.")
+    st.markdown("</div>", unsafe_allow_html=True)
 
+with menu[2]:
+    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
+    st.write("Our team consists of lecturers, researchers, and students.")
+    st.markdown("</div>", unsafe_allow_html=True)
 
+with menu[3]:
+    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
+    st.write("Laboratory experiments, research projects, and student practicums.")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+with menu[4]:
+    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
+    st.write("Announcements, schedules, and lab regulations.")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+with menu[5]:
+    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
+    st.subheader("Optical Signal Quality Detection (Demo)")
+    snr = st.slider("SNR (dB)", 0, 40, 25)
+    if snr >= 25:
+        st.success("✅ Signal Quality: GOOD")
+    elif snr >= 15:
+        st.warning("⚠️ Signal Quality: FAIR")
+    else:
+        st.error("❌ Signal Quality: POOR")
+    st.markdown("</div>", unsafe_allow_html=True)
