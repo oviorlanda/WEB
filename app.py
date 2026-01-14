@@ -35,7 +35,6 @@ html, body, [class*="css"] {
 /* CONTENT */
 .block-container {
     padding-top: 0rem;
-    background-color: #1E90FF !important;
 }
 
 /* HEADER */
@@ -58,10 +57,10 @@ button[kind="secondary"] {
 }
 
 button[kind="secondary"]:hover {
-    color: #cce4ff !important;
+    color: #dbeafe !important;
 }
 
-/* TEXT */
+/* SECTION */
 .subtitle {
     color: #dbeafe;
     font-weight: 700;
@@ -100,135 +99,105 @@ col1, col2 = st.columns([2, 6])
 
 with col1:
     if os.path.exists("ocl_logo.png.png"):
-        st.image("ocl_logo.png.png", width=160)
+        st.image("ocl_logo.png.png", width=140)
 
 with col2:
-    nav1, nav2, nav3, nav4 = st.columns(4)
+    n1, n2, n3, n4 = st.columns(4)
 
-    with nav1:
+    with n1:
         if st.button("About Us"):
             st.session_state.page = "about"
-    with nav2:
+    with n2:
         if st.button("Our Teams"):
             st.session_state.page = "team"
-    with nav3:
+    with n3:
         if st.button("Our Activity"):
             st.session_state.page = "activity"
-    with nav4:
+    with n4:
         if st.button("Informations"):
             st.session_state.page = "info"
 
-st.markdown('</div>', unsafe_allow_html=True)
-st.markdown("<br><br>", unsafe_allow_html=True)
+st.markdown("</div><br><br>", unsafe_allow_html=True)
 
 # ======================
 # CONTENT
 # ======================
 if st.session_state.page == "home":
-    st.markdown("""
-    <div style="padding:40px;">
-        <h1>Welcome to Optical Communication Laboratory</h1>
-        <p style="font-size:18px; max-width:850px;">
-        This website provides academic, research, and laboratory information
-        related to optical and photonic communication systems.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.header("Welcome to Optical Communication Laboratory")
+    st.write(
+        "This platform provides academic, laboratory, and research information "
+        "related to optical and photonic communication systems."
+    )
 
-# ========= ABOUT =========
+# ======================
+# ABOUT US
+# ======================
 elif st.session_state.page == "about":
+
     st.markdown("""
-    <div style="padding:40px;">
-        <p class="subtitle">ABOUT OCL</p>
+    <div style="padding:50px;">
+        <p class="subtitle">ABOUT US</p>
         <h2 class="section-title">Optical Communication Laboratory</h2>
 
-        <p style="margin-top:20px; max-width:900px; font-size:18px; line-height:1.7;">
-        Optical Communication Laboratory (OCL) is an academic laboratory dedicated
-        to education, research, and innovation in optical and photonic communication
-        systems.
+        <p style="margin-top:20px; max-width:1000px; font-size:18px; line-height:1.8;">
+        Laboratorium Komunikasi Optik (Optical Communication Laboratory) di 
+        <b>Telkom University</b> merupakan salah satu fasilitas riset dan pembelajaran
+        utama di bawah <b>Fakultas Teknik Elektro (FTE)</b>. Laboratorium ini berfokus
+        pada teknologi transmisi data menggunakan media cahaya yang menjadi
+        tulang punggung sistem telekomunikasi modern.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-    c1, c2, c3 = st.columns(3)
+    st.markdown("<div style='padding:40px;'><h3>🔹 Focus Area</h3></div>", unsafe_allow_html=True)
+
+    c1, c2, c3, c4 = st.columns(4)
 
     with c1:
-        st.markdown("""
-        <div class="card">
-            <h3>📡 Education</h3>
-            <p>Hands-on practicum modules and laboratory-based learning.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
+        st.markdown('<div class="card"><h4>SKSO</h4><p>Sistem komunikasi serat optik.</p></div>', unsafe_allow_html=True)
     with c2:
-        st.markdown("""
-        <div class="card">
-            <h3>🔬 Research</h3>
-            <p>Fiber optics, WDM, optical network performance analysis.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
+        st.markdown('<div class="card"><h4>FTTH</h4><p>Fiber to the Home networks.</p></div>', unsafe_allow_html=True)
     with c3:
-        st.markdown("""
-        <div class="card">
-            <h3>🌐 Innovation</h3>
-            <p>Experimental platforms for future photonic technologies.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="card"><h4>DWDM</h4><p>Multi-wavelength transmission.</p></div>', unsafe_allow_html=True)
+    with c4:
+        st.markdown('<div class="card"><h4>VLC</h4><p>Visible Light Communication.</p></div>', unsafe_allow_html=True)
 
     st.markdown("""
     <div style="padding:40px;">
-        <h3>Focus Areas</h3>
-        <ul style="font-size:17px; line-height:1.8;">
-            <li>Fiber Optic Communication</li>
-            <li>WDM Systems</li>
-            <li>Optical Access Networks</li>
-            <li>Photonic Devices</li>
+        <h3>🔬 Facilities & Equipment</h3>
+        <ul>
+            <li>Fusion Splicer</li>
+            <li>OTDR</li>
+            <li>Optical Power Meter</li>
+            <li>OptiSystem Simulation Software</li>
         </ul>
+
+        <h3 style="margin-top:25px;">🎓 Academic & Research</h3>
+        <ul>
+            <li>Fiber optic practicum & measurements</li>
+            <li>Industry certification & training</li>
+            <li>Optical sensor and FSO research</li>
+        </ul>
+
+        <h3 style="margin-top:25px;">🏭 Industry Relevance</h3>
+        <p>
+        Graduates gain industry-ready skills demanded by ISPs, network vendors,
+        and telecommunication infrastructure companies.
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
-# ========= TEAM =========
+# ======================
+# OTHER PAGES
+# ======================
 elif st.session_state.page == "team":
     st.header("Our Teams")
-    st.write("Lecturers, laboratory assistants, and student researchers.")
+    st.write("Lecturers, assistants, and student researchers.")
 
-# ========= ACTIVITY =========
 elif st.session_state.page == "activity":
     st.header("Our Activity")
-    st.write("Practical classes, research projects, and collaborations.")
+    st.write("Practicum sessions, research, and collaborations.")
 
-# ========= INFORMATION =========
 elif st.session_state.page == "info":
-    st.markdown("""
-    <div style="padding:40px;">
-        <p class="subtitle">ACADEMIC INFORMATION</p>
-        <h2 class="section-title">Our Module</h2>
-    </div>
-    """, unsafe_allow_html=True)
-
-    c1, c2, c3 = st.columns(3)
-
-    with c1:
-        st.markdown("""
-        <div class="card">
-            <h4>Optical Fiber</h4>
-            <p>Basic optical fiber transmission module.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c2:
-        st.markdown("""
-        <div class="card">
-            <h4>WDM System</h4>
-            <p>Wavelength Division Multiplexing experiments.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c3:
-        st.markdown("""
-        <div class="card">
-            <h4>Optical Network</h4>
-            <p>Access & backbone optical networks.</p>
-        </div>
-        """, unsafe_allow_html=True)
+    st.header("Informations")
+    st.write("Academic modules and laboratory information.")
