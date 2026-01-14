@@ -112,8 +112,8 @@ st.markdown('<div class="header">', unsafe_allow_html=True)
 col1, col2 = st.columns([2, 6])
 
 with col1:
-    if os.path.exists("ocl_logo.png.jpeg"):
-        st.image("ocl_logo.png.jpeg", width=90)
+    if os.path.exists("ocl_logo.png.png"):
+        st.image("ocl_logo.png.png", width=90)
 
 with col2:
     nav1, nav2, nav3, nav4 = st.columns(4)
@@ -187,3 +187,4 @@ elif st.session_state.page == "activity":
 elif st.session_state.page == "info":
     st.header("Informations")
     st.write("Announcements and laboratory information.")
+
