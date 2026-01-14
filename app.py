@@ -47,11 +47,6 @@ html, body, [class*="css"] {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* LOGO */
-.logo img {
-    border-radius: 12px;
-}
-
 /* ===== NAV BUTTON ===== */
 button[kind="secondary"] {
     background: transparent !important;
@@ -113,7 +108,7 @@ col1, col2 = st.columns([2, 6])
 
 with col1:
     if os.path.exists("ocl_logo.png.png"):
-        st.image("ocl_logo.png.png", width=200)
+        st.image("ocl_logo.png.png", width=140)
 
 with col2:
     nav1, nav2, nav3, nav4 = st.columns(4)
@@ -138,10 +133,32 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 # CONTENT
 # ======================
 if st.session_state.page == "home":
+    st.header("Welcome to Optical Communication Laboratory")
+    st.write(
+        "This website provides academic and laboratory information related "
+        "to optical and photonic communication systems."
+    )
+
+elif st.session_state.page == "about":
+    st.header("About Us")
+    st.write(
+        "Optical Communication Laboratory focuses on education, research, "
+        "and innovation in optical and photonic communication technologies."
+    )
+
+elif st.session_state.page == "team":
+    st.header("Our Teams")
+    st.write("Our laboratory consists of lecturers, assistants, and student researchers.")
+
+elif st.session_state.page == "activity":
+    st.header("Our Activity")
+    st.write("Practical sessions, academic research, and collaborative projects.")
+
+elif st.session_state.page == "info":
 
     st.markdown("""
     <div style="padding: 40px;">
-        <p class="subtitle">MODULE</p>
+        <p class="subtitle">ACADEMIC INFORMATION</p>
         <h2 class="section-title">Our Module</h2>
     </div>
     """, unsafe_allow_html=True)
@@ -171,22 +188,3 @@ if st.session_state.page == "home":
             <p>Optical access & backbone network module.</p>
         </div>
         """, unsafe_allow_html=True)
-
-elif st.session_state.page == "about":
-    st.header("About Us")
-    st.write("Optical Communication Laboratory focuses on optical & photonic education and research.")
-
-elif st.session_state.page == "team":
-    st.header("Our Teams")
-    st.write("Our lecturers, assistants, and researchers.")
-
-elif st.session_state.page == "activity":
-    st.header("Our Activity")
-    st.write("Practical sessions, research, and collaborations.")
-
-elif st.session_state.page == "info":
-    st.header("Informations")
-    st.write("Announcements and laboratory information.")
-
-
-
