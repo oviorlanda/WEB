@@ -1,147 +1,155 @@
 import streamlit as st
 
-# ========================
-# CONFIG
-# ========================
 st.set_page_config(
     page_title="Optical Communication Laboratory",
+    page_icon="🔵",
     layout="wide"
 )
 
-# ========================
-# STATE MODE
-# ========================
+# ===============================
+# STATE
+# ===============================
 if "mode" not in st.session_state:
-    st.session_state.mode = "OCL"
+    st.session_state.mode = "info"
 
-
-# ========================
-# CSS MODE OCL
-# ========================
-def ocl_style():
-    st.markdown("""
+# ===============================
+# CSS
+# ===============================
+st.markdown(
+    """
     <style>
-    .stApp {
-        background-color: white;
+    body {
+        background-color: #f5f7fa;
     }
 
-    .ocl-header {
-        background: linear-gradient(135deg, #1E90FF, #187bcd);
-        padding: 40px 20px;
-        border-radius: 0 0 30px 30px;
-        text-align: center;
+    .header {
+        background-color: #1E90FF;
+        padding: 35px 20px;
+        border-radius: 0px 0px 25px 25px;
+    }
+
+    .lab-title {
+        font-size: 36px;
+        font-weight: 700;
         color: white;
-        margin-bottom: 30px;
+        margin-bottom: 5px;
     }
 
-    .ocl-title {
-        font-size: 38px;
-        font-weight: 800;
-        margin-top: 10px;
+    .lab-subtitle {
+        font-size: 16px;
+        color: #eaf3ff;
     }
 
-    .ocl-subtitle {
-        font-size: 18px;
-        opacity: 0.9;
+    .content-box {
+        padding: 30px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        margin-top: 25px;
     }
 
-    .menu-box {
-        background-color: #f7f9fc;
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-        margin-bottom: 20px;
+    .stButton>button {
+        background-color: #ffffff;
+        color: #1E90FF;
+        border-radius: 8px;
+        border: none;
+        padding: 6px 14px;
+        font-weight: 600;
     }
 
+    .stButton>button:hover {
+        background-color: #eaf3ff;
+    }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
+# ===============================
+# HEADER
+# ===============================
+st.markdown('<div class="header">', unsafe_allow_html=True)
+col1, col2 = st.columns([1.2, 4])
 
-# ========================
-# MODE SWITCH BUTTON
-# ========================
-col1, col2 = st.columns([8, 2])
+with col1:
+    st.image("ocl_logo.png.png", width=140)
 
 with col2:
-    if st.session_state.mode == "OCL":
-        if st.button("🔁 Default Mode"):
-            st.session_state.mode = "DEFAULT"
-            st.rerun()
-    else:
-        if st.button("🎨 OCL Mode"):
-            st.session_state.mode = "OCL"
-            st.rerun()
+    st.markdown('<div class="lab-title">Optical Communication Laboratory</div>', unsafe_allow_html=True)
+    st.markdown('<div class="lab-subtitle">Research • Education • Innovation</div>', unsafe_allow_html=True)
 
-# ========================
-# APPLY STYLE
-# ========================
-if st.session_state.mode == "OCL":
-    ocl_style()
+st.markdown("</div>", unsafe_allow_html=True)
 
-# ========================
-# HEADER
-# ========================
-if st.session_state.mode == "OCL":
-    st.markdown("""
-    <div class="ocl-header">
-        <img src="ocl_logo.png.png" width="160">
-        <div class="ocl-title">Optical Communication Laboratory</div>
-        <div class="ocl-subtitle">Research • Education • Innovation</div>
-    </div>
-    """, unsafe_allow_html=True)
-else:
-    st.image("ocl_logo.png.png", width=160)
-    st.title("Optical Communication Laboratory")
-    st.write("Research • Education • Innovation")
+# ===============================
+# NAVBAR (TOP)
+# ===============================
+menu_cols = st.columns(7)
 
-# ========================
-# NAVIGATION
-# ========================
-menu = st.tabs([
-    "🏠 Home",
-    "👥 About Us",
-    "🧑‍🔬 Our Team",
-    "🔬 Our Activity",
-    "ℹ️ Informations",
-    "🤖 AI Feature"
-])
+menus = [
+    "HOME",
+    "ABOUT US",
+    "OUR TEAM",
+    "OUR ACTIVITY",
+    "INFORMATIONS",
+    "AI MODE",
+    "RESET"
+]
 
-# ========================
+clicked = None
+for i, m in enumerate(menus):
+    if menu_cols[i].button(m):
+        clicked = m
+
+if clicked == "AI MODE":
+    st.session_state.mode = "ai"
+
+if clicked == "RESET":
+    st.session_state.mode = "info"
+
+# ===============================
 # CONTENT
-# ========================
-with menu[0]:
-    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
-    st.write("Welcome to the Optical Communication Laboratory web platform.")
-    st.markdown("</div>", unsafe_allow_html=True)
+# ===============================
+st.markdown('<div class="content-box">', unsafe_allow_html=True)
 
-with menu[1]:
-    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
-    st.write("OCL focuses on optical fiber systems, photonics, and communication research.")
-    st.markdown("</div>", unsafe_allow_html=True)
+if st.session_state.mode == "info":
 
-with menu[2]:
-    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
-    st.write("Our team consists of lecturers, researchers, and students.")
-    st.markdown("</div>", unsafe_allow_html=True)
+    if clicked == "ABOUT US":
+        st.header("About Us")
+        st.write(
+            "Optical Communication Laboratory (OCL) focuses on research, education, "
+            "and experimentation in fiber optic communication systems."
+        )
 
-with menu[3]:
-    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
-    st.write("Laboratory experiments, research projects, and student practicums.")
-    st.markdown("</div>", unsafe_allow_html=True)
+    elif clicked == "OUR TEAM":
+        st.header("Our Team")
+        st.write("Consists of lecturers, researchers, and students in optical communication.")
 
-with menu[4]:
-    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
-    st.write("Announcements, schedules, and lab regulations.")
-    st.markdown("</div>", unsafe_allow_html=True)
+    elif clicked == "OUR ACTIVITY":
+        st.header("Our Activity")
+        st.write("Research, practicum sessions, publications, and laboratory development.")
 
-with menu[5]:
-    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
-    st.subheader("Optical Signal Quality Detection (Demo)")
-    snr = st.slider("SNR (dB)", 0, 40, 25)
-    if snr >= 25:
-        st.success("✅ Signal Quality: GOOD")
-    elif snr >= 15:
-        st.warning("⚠️ Signal Quality: FAIR")
+    elif clicked == "INFORMATIONS":
+        st.header("Informations")
+        st.write("Latest news, schedules, and announcements related to OCL.")
+
     else:
-        st.error("❌ Signal Quality: POOR")
-    st.markdown("</div>", unsafe_allow_html=True)
+        st.header("Welcome")
+        st.write(
+            "Welcome to the Optical Communication Laboratory website.\n\n"
+            "Explore research, facilities, and innovations in optical communications."
+        )
+
+else:
+    st.header("🔍 Optical Signal Quality Detection (Demo)")
+    st.write(
+        "This is a **demo AI feature**.\n\n"
+        "In future development, this section can analyze:\n"
+        "- Signal attenuation\n"
+        "- Noise impact\n"
+        "- BER estimation\n"
+        "- Fiber quality assessment"
+    )
+
+    st.info("This AI feature is currently illustrative (no model required).")
+
+st.markdown("</div>", unsafe_allow_html=True)
