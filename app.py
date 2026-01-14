@@ -21,7 +21,7 @@ if "page" not in st.session_state:
 st.markdown("""
 <style>
 
-/* RESET */
+/* ===== RESET ===== */
 html, body, [class*="css"] {
     background-color: #1E90FF !important;
 }
@@ -35,32 +35,38 @@ html, body, [class*="css"] {
 /* CONTENT */
 .block-container {
     padding-top: 0rem;
+    background-color: #1E90FF !important;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 .header {
     background: linear-gradient(135deg, #1b6fe5, #2d8cff);
-    padding: 30px 50px;
+    padding: 30px 60px;
     border-bottom-left-radius: 60px;
     border-bottom-right-radius: 60px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* NAV BUTTON */
+/* LOGO */
+.logo img {
+    border-radius: 12px;
+}
+
+/* ===== NAV BUTTON ===== */
 button[kind="secondary"] {
     background: transparent !important;
     color: #ffffff !important;
     border: none !important;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
-    padding: 8px 10px;   /* 🔹 lebih rapat */
+    padding: 10px 16px;
 }
 
 button[kind="secondary"]:hover {
     color: #cce4ff !important;
 }
 
-/* SECTION */
+/* ===== SECTION ===== */
 .subtitle {
     color: #dbeafe;
     font-weight: 700;
@@ -70,9 +76,10 @@ button[kind="secondary"]:hover {
 .section-title {
     font-size: 36px;
     font-weight: 800;
+    margin-top: 5px;
 }
 
-/* CARD */
+/* ===== CARD ===== */
 .card {
     background: #2d7ff0;
     border-radius: 22px;
@@ -86,6 +93,14 @@ button[kind="secondary"]:hover {
     background: #3b91ff;
 }
 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .header {
+        padding: 20px 25px;
+        text-align: center;
+    }
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -94,16 +109,14 @@ button[kind="secondary"]:hover {
 # ======================
 st.markdown('<div class="header">', unsafe_allow_html=True)
 
-# 🔹 MENU LEBIH KE KIRI
-col1, col2 = st.columns([2, 5])
+col1, col2 = st.columns([2, 6])
 
 with col1:
     if os.path.exists("ocl_logo.png.png"):
         st.image("ocl_logo.png.png", width=200)
 
 with col2:
-    # 🔹 JARAK MENU DIPERKECIL
-    nav1, nav2, nav3, nav4 = st.columns([1,1,1,1], gap="small")
+    nav1, nav2, nav3, nav4 = st.columns(4)
 
     with nav1:
         if st.button("About Us"):
@@ -118,14 +131,16 @@ with col2:
         if st.button("Informations"):
             st.session_state.page = "info"
 
-st.markdown("</div><br><br>", unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
+st.markdown("<br><br>", unsafe_allow_html=True)
 
 # ======================
 # CONTENT
 # ======================
 if st.session_state.page == "home":
+
     st.markdown("""
-    <div style="padding:40px;">
+    <div style="padding: 40px;">
         <p class="subtitle">MODULE</p>
         <h2 class="section-title">Our Module</h2>
     </div>
@@ -134,11 +149,28 @@ if st.session_state.page == "home":
     c1, c2, c3 = st.columns(3)
 
     with c1:
-        st.markdown('<div class="card"><h4>Optical Fiber</h4><p>Basic optical fiber transmission module.</p></div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="card">
+            <h4>Optical Fiber</h4>
+            <p>Basic optical fiber transmission module.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
     with c2:
-        st.markdown('<div class="card"><h4>WDM System</h4><p>Wavelength Division Multiplexing experiment.</p></div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="card">
+            <h4>WDM System</h4>
+            <p>Wavelength Division Multiplexing experiment.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
     with c3:
-        st.markdown('<div class="card"><h4>Optical Network</h4><p>Optical access & backbone network module.</p></div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="card">
+            <h4>Optical Network</h4>
+            <p>Optical access & backbone network module.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
 elif st.session_state.page == "about":
     st.header("About Us")
