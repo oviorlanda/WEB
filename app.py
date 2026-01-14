@@ -20,74 +20,97 @@ if "page" not in st.session_state:
 # ======================
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
 
-/* RESET */
+* { font-family: 'Inter', sans-serif; }
+
 html, body, [class*="css"] {
-    background-color: #1E90FF !important;
-}
-
-/* ROOT */
-.stApp {
-    background-color: #1E90FF !important;
-    color: #ffffff;
-}
-
-/* CONTENT */
-.block-container {
-    padding-top: 0rem;
-    background-color: #1E90FF !important;
+    background-color: #020617;
 }
 
 /* HEADER */
 .header {
-    background: linear-gradient(135deg, #1b6fe5, #2d8cff);
-    padding: 30px 60px;
-    border-bottom-left-radius: 60px;
-    border-bottom-right-radius: 60px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #1E90FF, #2563EB);
+    padding: 30px 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 /* NAV BUTTON */
 button[kind="secondary"] {
     background: transparent !important;
-    color: #ffffff !important;
     border: none !important;
-    font-size: 15px;
+    color: white !important;
     font-weight: 600;
-    padding: 10px 16px;
 }
 
 button[kind="secondary"]:hover {
-    color: #cce4ff !important;
+    color: #DBEAFE !important;
 }
 
-/* TEXT */
-.subtitle {
-    color: #dbeafe;
+/* HERO */
+.hero-wrapper {
+    display: flex;
+    height: 88vh;
+}
+
+.hero-left {
+    width: 50%;
+    padding: 80px;
+    background: linear-gradient(135deg, #1E90FF, #2563EB);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-title {
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    margin-top: 20px;
+    max-width: 520px;
+    opacity: 0.95;
+}
+
+.hero-btn {
+    margin-top: 35px;
+}
+
+.hero-btn a {
+    text-decoration: none;
+    background: white;
+    color: #1E3A8A;
+    padding: 14px 36px;
+    border-radius: 40px;
     font-weight: 700;
-    letter-spacing: 1.2px;
 }
 
-.section-title {
-    font-size: 36px;
-    font-weight: 800;
-    margin-top: 5px;
+.hero-right {
+    width: 50%;
+    background: #020617;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* CARD */
-.card {
-    background: #2d7ff0;
+.glass-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
+    padding: 40px;
     border-radius: 22px;
-    padding: 28px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
-    transition: 0.3s ease-in-out;
+    color: white;
+    max-width: 420px;
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    background: #3b91ff;
+.glass-card h3 {
+    color: #38BDF8;
 }
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -103,169 +126,67 @@ with col1:
         st.image("ocl_logo.png.png", width=160)
 
 with col2:
-    nav1, nav2, nav3, nav4 = st.columns(4)
-
+    nav1, nav2, nav3, nav4 = st.columns([1,1,1,1])
     with nav1:
+        if st.button("Home"):
+            st.session_state.page = "home"
+    with nav2:
         if st.button("About Us"):
             st.session_state.page = "about"
-    with nav2:
-        if st.button("Our Teams"):
-            st.session_state.page = "team"
     with nav3:
-        if st.button("Our Activity"):
-            st.session_state.page = "activity"
+        if st.button("Our Team"):
+            st.session_state.page = "team"
     with nav4:
-        if st.button("Informations"):
-            st.session_state.page = "info"
+        if st.button("Activity"):
+            st.session_state.page = "activity"
 
 st.markdown('</div>', unsafe_allow_html=True)
-st.markdown("<br><br>", unsafe_allow_html=True)
 
 # ======================
 # CONTENT
 # ======================
 if st.session_state.page == "home":
     st.markdown("""
-    <div style="
-        padding:70px 60px;
-        max-width:1200px;
-    ">
-        <p class="subtitle">WELCOME</p>
-
-        <h1 style="
-            font-size:48px;
-            font-weight:900;
-            line-height:1.2;
-            margin-bottom:20px;
-        ">
-            Optical Communication Laboratory
-        </h1>
-
-        <p style="
-            font-size:20px;
-            line-height:1.8;
-            max-width:900px;
-            color:#eaf3ff;
-        ">
-        The Optical Communication Laboratory (OCL) is a leading academic laboratory
-        focusing on education, research, and innovation in optical and photonic
-        communication systems that support modern telecommunication infrastructure.
-        </p>
-
-        <div style="margin-top:40px; display:flex; gap:25px; flex-wrap:wrap;">
-            <div class="card" style="max-width:280px;">
-                <h3>🎓 Education</h3>
-                <p>Hands-on practical learning for optical communication systems.</p>
+    <div class="hero-wrapper">
+        <div class="hero-left">
+            <div class="hero-title">
+                Lighting the Future<br>of Connectivity
             </div>
-
-            <div class="card" style="max-width:280px;">
-                <h3>🔍 Research</h3>
-                <p>Fiber optics, WDM, FTTH, and optical network analysis.</p>
+            <div class="hero-subtitle">
+                Optical Communication Laboratory focuses on fiber optics,
+                photonics, and high-speed communication technologies
+                for education, research, and innovation.
             </div>
+            <div class="hero-btn">
+                <a href="#">Explore Our Lab</a>
+            </div>
+        </div>
 
-            <div class="card" style="max-width:280px;">
-                <h3>🚀 Innovation</h3>
-                <p>Developing future photonic and optical technologies.</p>
+        <div class="hero-right">
+            <div class="glass-card">
+                <h3>Optical Communication Lab</h3>
+                <p>
+                    A research-driven laboratory dedicated to optical fiber,
+                    laser communication, and photonic systems.
+                </p>
+                <ul>
+                    <li>🔹 Fiber Optic Systems</li>
+                    <li>🔹 Photonic Technology</li>
+                    <li>🔹 High-Speed Networks</li>
+                </ul>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-# ========= ABOUT =========
 elif st.session_state.page == "about":
-    st.markdown("""
-    <div style="padding:40px;">
-        <p class="subtitle">ABOUT OCL</p>
-        <h2 class="section-title">Optical Communication Laboratory</h2>
+    st.header("About Us")
+    st.write("Optical Communication Laboratory focuses on optical and photonic education and research.")
 
-        <p style="margin-top:20px; max-width:900px; font-size:18px; line-height:1.7;">
-        Optical Communication Laboratory (OCL) is an academic laboratory dedicated
-        to education, research, and innovation in optical and photonic communication
-        systems.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    c1, c2, c3 = st.columns(3)
-
-    with c1:
-        st.markdown("""
-        <div class="card">
-            <h3>📡 Education</h3>
-            <p>Hands-on practicum modules and laboratory-based learning.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c2:
-        st.markdown("""
-        <div class="card">
-            <h3>🔬 Research</h3>
-            <p>Fiber optics, WDM, optical network performance analysis.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c3:
-        st.markdown("""
-        <div class="card">
-            <h3>🌐 Innovation</h3>
-            <p>Experimental platforms for future photonic technologies.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div style="padding:40px;">
-        <h3>Focus Areas</h3>
-        <ul style="font-size:17px; line-height:1.8;">
-            <li>Fiber Optic Communication</li>
-            <li>WDM Systems</li>
-            <li>Optical Access Networks</li>
-            <li>Photonic Devices</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-
-# ========= TEAM =========
 elif st.session_state.page == "team":
-    st.header("Our Teams")
-    st.write("Lecturers, laboratory assistants, and student researchers.")
+    st.header("Our Team")
+    st.write("Lecturers, laboratory assistants, and researchers.")
 
-# ========= ACTIVITY =========
 elif st.session_state.page == "activity":
     st.header("Our Activity")
-    st.write("Practical classes, research projects, and collaborations.")
-
-# ========= INFORMATION =========
-elif st.session_state.page == "info":
-    st.markdown("""
-    <div style="padding:40px;">
-        <p class="subtitle">ACADEMIC INFORMATION</p>
-        <h2 class="section-title">Our Module</h2>
-    </div>
-    """, unsafe_allow_html=True)
-
-    c1, c2, c3 = st.columns(3)
-
-    with c1:
-        st.markdown("""
-        <div class="card">
-            <h4>Optical Fiber</h4>
-            <p>Basic optical fiber transmission module.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c2:
-        st.markdown("""
-        <div class="card">
-            <h4>WDM System</h4>
-            <p>Wavelength Division Multiplexing experiments.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c3:
-        st.markdown("""
-        <div class="card">
-            <h4>Optical Network</h4>
-            <p>Access & backbone optical networks.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
+    st.write("Practical sessions, experiments, and collaborative research.")
